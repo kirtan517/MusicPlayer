@@ -1,7 +1,11 @@
 
 
+
 const HomeComponent = () => {
-    return ( <div>Home THis is </div> );
+    
+    return (<h1>This is the home compk</h1>)
+      
+
 }
  
 export default HomeComponent;

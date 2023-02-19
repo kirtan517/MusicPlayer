@@ -9,14 +9,14 @@ function App() {
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <NavBar />
-      <Layout className="site-layout">
+      <Layout className="site-layout" style={{ minHeight: "100vh"}}>
         <Header
           style={{
             padding: 0,
             // background: colorBgContainer
           }}
         />
-        <Content style={{ margin: "0 16px" }}>
+        <Content style={{ margin: "0 16px" }} >
           <AppRoutes></AppRoutes>
 
           {/* <Breadcrumb style={{ margin: "16px 0" }}>

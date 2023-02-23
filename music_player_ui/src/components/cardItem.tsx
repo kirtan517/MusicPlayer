@@ -9,7 +9,7 @@ const CardItem = () => {
             cover={
                 <img
                     alt="example"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                    src="../images/TS.png"
                 />
             }
             actions={[

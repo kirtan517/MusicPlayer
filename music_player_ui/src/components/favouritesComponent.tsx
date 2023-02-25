@@ -1,5 +1,5 @@
 import { Col, Row } from "antd";
-import CardItem from "./cardItem";
+import CardItem from "./Home/cardItem";
 
 const FavouritesComponent = () => {
     return (

@@ -1,9 +1,6 @@
 import {
   AntDesignOutlined,
-  HeartFilled,
   HeartOutlined,
-  LikeFilled,
-  PlayCircleFilled,
 } from "@ant-design/icons";
 import { Avatar, Button, Image, Space } from "antd";
 import { SizeType } from "antd/es/config-provider/SizeContext";
@@ -14,7 +11,6 @@ import "./songComponent.css";
 import CustomizedTables from "./Table";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import GlobalStyles from "@mui/material/GlobalStyles";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import PlayCircleOutlinedIcon from '@mui/icons-material/PlayCircleOutlined';
@@ -28,8 +24,6 @@ const SongComponent = () => {
       mode: "dark",
     },
   });
-
-  const inputGlobalStyles = <GlobalStyles styles={{ padding: "20px 20px", background : "red important!" }} />;
 
   const SongDescription = (
     <Container
@@ -139,16 +133,17 @@ const SongComponent = () => {
   );
 
   return (
-    <>
+    <Container maxWidth = "xl" style = {{margin : "0px 0px" ,padding : "0px 0px" , width : "100%" }} >
       <Container
         component="main"
         style={{
           backgroundImage: "linear-gradient(to bottom, #8dc6ff, #000000 90%)",
           margin: "0",
-          height: "40%",
+          height: "450px",
           zIndex: "-1px",
           padding: "30px 30px",
           display: "flex",
+          position : "relative",
         }}
         maxWidth="xl"
       >
@@ -192,13 +187,14 @@ const SongComponent = () => {
         style={{
           zIndex: "1px",
           position: "relative",
-          margin: "-130px 0px",
+          display : "inline-block",
+          margin: "-10% 0px",
           padding: "0px 0px",
-          width: "100%",
-          backgroundImage: "linear-gradient(to bottom,#22313f , #000000 30%)",
+          backgroundImage: "linear-gradient(to bottom,#22313f , #000000 40%)",
           height: "85%",
           backdropFilter: "blur(7.6px)",
           WebkitBackdropFilter: "blur(11.6px)",
+          width : "100%",
         }}
         maxWidth="xl"
       >
@@ -240,7 +236,7 @@ const SongComponent = () => {
           <CustomizedTables />
         </ThemeProvider>
       </Container>
-    </>
+    </Container>
   );
 };
 

@@ -55,6 +55,9 @@ const rows = [
   createData("Eclair", 262, "2021"),
   createData("Cupcake", 305, "2020"),
   createData("Gingerbread", 356, "2021"),
+  createData("Frozen yoghurt", 159, "2023"),
+  createData("Ice cream sandwich", 237, "2022"),
+  createData("Eclair", 262, "2021"),
 ];
 
 export default function CustomizedTables() {

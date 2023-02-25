@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import FavouritesComponent from "../components/favouritesComponent";
 
-import HomeComponent from "../components/homeComponents";
+import HomeComponent from "../components/Home/homeComponents";
 import SongComponent from "../components/Song/songComponent";
 
 const AppRoutes = () => {

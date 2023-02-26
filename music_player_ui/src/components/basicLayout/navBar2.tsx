@@ -21,6 +21,12 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
 import { login, logout } from "../../store/user";
+import { useNavigate } from "react-router";
+import LogoSymbol from "../../images/LogoSymbol.png";
+import LogoFull from "../../images/LogoFull.png";
+import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+
 
 const drawerWidth = 240;
 
@@ -100,6 +106,8 @@ export default function NavBar2({ children }: any): JSX.Element {
 		(state: RootState) => state.user.isUserLogedIn
 	);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
 
 	const handleDrawerOpen = () => {
 		setOpen(true);
@@ -109,10 +117,19 @@ export default function NavBar2({ children }: any): JSX.Element {
 		setOpen(false);
 	};
 
+	const handleNavigation = (text: string) => {
+		if (text == "Home")
+			navigate("/")
+		else if (text == "Favourites")
+			navigate("/favourites")
+		else if (text == "Search")
+			navigate("/song")
+	}
+
 	return (
 		<Box sx={{ display: "flex", background: "black" }}>
 			<CssBaseline />
-			<AppBar position="fixed" open={open} style={{ background: "red" }}>
+			<AppBar position="fixed" open={open} style={{ background: "magenta" }}>
 				<Toolbar>
 					<IconButton
 						color="inherit"
@@ -124,7 +141,7 @@ export default function NavBar2({ children }: any): JSX.Element {
 							...(open && { display: "none" }),
 						}}
 					>
-						<MenuIcon />
+						<img src={LogoSymbol} alt="Logo" height={"50px"} width={"50px"} />
 					</IconButton>
 					<Typography variant="h6" noWrap component="div">
 						Mini variant drawer
@@ -147,6 +164,10 @@ export default function NavBar2({ children }: any): JSX.Element {
 			</AppBar>
 			<Drawer variant="permanent" open={open}>
 				<DrawerHeader>
+					<div style={{ width: "100%", justifyContent: "center", alignItems: "center", display: "flex" }}>
+						<img src={LogoFull} alt="Logo" height={"45px"} width={"125px"} />
+					</div>
+
 					<IconButton onClick={handleDrawerClose}>
 						{theme.direction === "rtl" ? (
 							<ChevronRightIcon />
@@ -154,11 +175,13 @@ export default function NavBar2({ children }: any): JSX.Element {
 							<ChevronLeftIcon />
 						)}
 					</IconButton>
+
+
 				</DrawerHeader>
 				<Divider />
 				<List>
 					{["Home", "Favourites", "Search"].map((text, index) => (
-						<ListItem key={text} disablePadding sx={{ display: "block" }}>
+						<ListItem key={text} disablePadding sx={{ display: "block" }} onClick={() => handleNavigation(text)}>
 							<ListItemButton
 								sx={{
 									minHeight: 48,
@@ -181,6 +204,19 @@ export default function NavBar2({ children }: any): JSX.Element {
 					))}
 				</List>
 				<Divider />
+				<IconButton
+					color="inherit"
+					aria-label="open drawer"
+					onClick={!open? handleDrawerOpen: handleDrawerClose}
+					edge="start"
+					sx={{
+						marginRight: 5,
+						...(open && { display: "none" }),
+					}}
+					style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}
+				>
+					{!open? <ArrowForwardIosOutlinedIcon /> :  <ArrowBackIosIcon />}
+				</IconButton>
 			</Drawer>
 			<Box component="main" sx={{ flexGrow: 1, p: 0, m: 0 }} maxWidth="100%">
 				<DrawerHeader />

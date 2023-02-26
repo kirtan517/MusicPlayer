@@ -1,0 +1,80 @@
+.songDescription {
+  background: rgba(0, 0, 0, 0);
+  box-shadow: 0 0px 30px rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.39);
+  padding: 0;
+}
+.songButton-grid {
+  padding: 10px 0px;
+  margin: 0px 0px;
+}
+.songDescription-space {
+  padding: 0.5em;
+}
+.songDescription-button {
+  margin: 10px 10px;
+  font-size: 3em;
+  width: fit-content;
+  height: fit-content;
+  border: rgba(0, 0, 0, 0);
+  border-radius: 50%;
+}
+.songImage-container {
+  background-image: linear-gradient(to bottom, #8dc6ff, #000000 75%);
+  margin: 0;
+  height: 450px;
+  z-index: -1px;
+  padding: 30px 30px;
+  display: flex;
+  position: relative;
+}
+.songImage {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+  border-radius: 12px;
+}
+.songImageDiscription {
+  display: block;
+  flex-direction: column;
+  color: white;
+  font-weight: bold;
+  padding: 20px 20px;
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+}
+.songDescriptionTableContainer {
+  z-index: 1px;
+  position: relative;
+  display: inline-block;
+  margin: -10% 0px;
+  padding: 0px 0px;
+  background-image: linear-gradient(to bottom, #22313f, #000000 12%);
+  height: 85%;
+  backdrop-filter: blur(7.6px);
+  -webkit-backdrop-filter: blur(11.6px);
+  width: 100%;
+
+}
+.songTableHeading {
+  color: white;
+  font-weight: bold;
+  padding: 20px 20px;
+  margin: 0px 0px;
+
+}
+.songArtistTags {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+
+}
+.songIcon {
+  font-size: large;
+  transform: scale(1.9);
+}
+.songArtistContainer{
+  padding: 10px 10px;
+  margin: 0px 0px;
+}

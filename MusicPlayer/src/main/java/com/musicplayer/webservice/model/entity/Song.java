@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToMany;
 import java.math.BigInteger;
 import java.util.Date;
@@ -17,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Songs extends BaseId{
+public class Song extends BaseId{
     private String name;
     private String description;
     private String lyrics;

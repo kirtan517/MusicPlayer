@@ -5,6 +5,7 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
+import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -17,7 +18,13 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import * as React from "react";
-import { Grid } from "@material-ui/core";
+
+import { useNavigate } from "react-router";
+import LogoSymbol from "../../images/LogoSymbol.png";
+import LogoFull from "../../images/LogoFull.png";
+import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { Container, Grid } from "@material-ui/core";
 import "./navbar.css";
 import Profile from "./profile";
 
@@ -95,6 +102,7 @@ const Drawer = styled(MuiDrawer, {
 export default function NavBar({ children }: any): JSX.Element {
 	const theme = useTheme();
 	const [open, setOpen] = React.useState(false);
+	const navigate = useNavigate();
 
 	const handleDrawerOpen = () => {
 		setOpen(true);
@@ -104,8 +112,17 @@ export default function NavBar({ children }: any): JSX.Element {
 		setOpen(false);
 	};
 
-	const handleForward = () => {};
-	const handleBackward = () => {};
+	const handleNavigation = (text: string) => {
+		if (text == "Home")
+			navigate("/")
+		else if (text == "Favourites")
+			navigate("/favourites")
+		else if (text == "Search")
+			navigate("/song")
+	}
+
+	const handleForward = () => { };
+	const handleBackward = () => { };
 
 	const styles = {
 		background: "rgba(29, 26, 26, 0.76)",
@@ -127,11 +144,13 @@ export default function NavBar({ children }: any): JSX.Element {
 						edge="start"
 						sx={{
 							marginRight: 5,
+							marginLeft: -2,
+							padding: 0,
 							...(open && { display: "none" }),
-							color : "white",
+							color: "white",
 						}}
 					>
-						<MenuIcon style = {{color : "white"}} />
+						<img src={LogoSymbol} alt="Logo" height={"50px"} width={"50px"} />
 					</IconButton>
 					<Grid container>
 						<Grid
@@ -169,24 +188,28 @@ export default function NavBar({ children }: any): JSX.Element {
 				}}
 			>
 				<DrawerHeader>
+					<div style={{ width: "100%", justifyContent: "center", alignItems: "center", display: "flex", marginTop: 2 }}>
+						<img src={LogoFull} alt="Logo" height={"45px"} width={"125px"} />
+					</div>
+
 					<IconButton onClick={handleDrawerClose}>
 						{theme.direction === "rtl" ? (
-							<ChevronRightIcon style = {{color : "white"}} />
+							<ChevronRightIcon style={{ color: "white" }} />
 						) : (
-							<ChevronLeftIcon style = {{color : "white"}} />
+							<ChevronLeftIcon style={{ color: "white" }} />
 						)}
 					</IconButton>
 				</DrawerHeader>
 				<Divider />
 				<List>
 					{["Home", "Favourites", "Search"].map((text, index) => (
-						<ListItem key={text} disablePadding sx={{ display: "block" }}>
+						<ListItem key={text} disablePadding sx={{ display: "block" }} onClick={() => handleNavigation(text)}>
 							<ListItemButton
 								sx={{
 									minHeight: 48,
 									justifyContent: open ? "initial" : "center",
 									px: 3,
-									color : "white"
+									color: "white"
 								}}
 							>
 								<ListItemIcon
@@ -194,7 +217,7 @@ export default function NavBar({ children }: any): JSX.Element {
 										minWidth: 0,
 										mr: open ? 3 : "auto",
 										justifyContent: "center",
-										color : "white"
+										color: "white"
 									}}
 								>
 									{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -205,6 +228,34 @@ export default function NavBar({ children }: any): JSX.Element {
 					))}
 				</List>
 				<Divider />
+				<List style={{ marginTop: `auto`}} >
+					<ListItem>
+						<Container style={{
+							display: "flex",
+							justifyContent: "center",
+							alignItems: "center",
+						}}>
+							<IconButton
+								aria-label="open drawer"
+								onClick={!open ? handleDrawerOpen : handleDrawerClose}
+								edge="start"
+								sx={{
+									...(open && { display: "none" }),
+									color: "white",
+									display: "flex",
+									justifyContent: "center",
+									alignItems: "center",
+								}}
+								style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}
+								size="large"
+							>
+								{!open ? <ArrowForwardIosOutlinedIcon /> : <ArrowBackIosIcon />}
+							</IconButton>
+						</Container>
+					</ListItem>
+				</List>
+
+
 			</Drawer>
 			<Box component="main" sx={{ flexGrow: 1, p: 0, m: 0 }} maxWidth="100%">
 				<DrawerHeader />

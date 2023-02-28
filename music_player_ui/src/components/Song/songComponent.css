@@ -48,7 +48,7 @@
   display: inline-block;
   margin: -10% 0px;
   padding: 0px 0px;
-  background-image: linear-gradient(to bottom, #22313f, #000000 12%);
+  background-image: linear-gradient(to bottom, #22313f, #000000 25%);
   height: 85%;
   backdrop-filter: blur(7.6px);
   -webkit-backdrop-filter: blur(11.6px);

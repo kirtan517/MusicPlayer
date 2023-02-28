@@ -1,113 +1,215 @@
-import {
-  AppstoreOutlined,
-  ContainerOutlined,
-  MenuFoldOutlined,
-  PieChartOutlined,
-  MailOutlined,
-  DesktopOutlined,
-  MenuUnfoldOutlined,
-  HomeOutlined,
-} from "@ant-design/icons";
-import { Button, Menu, MenuProps } from "antd";
-import { useState } from "react";
-import { Breadcrumb, Layout, theme } from "antd";
-import { useNavigate } from "react-router-dom";
+import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import MuiDrawer from "@mui/material/Drawer";
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import List from "@mui/material/List";
+import CssBaseline from "@mui/material/CssBaseline";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import MailIcon from "@mui/icons-material/Mail";
+import * as React from "react";
+import { Grid } from "@material-ui/core";
+import "./navbar.css";
+import Profile from "./profile";
 
-const { Header, Content, Footer, Sider } = Layout;
+const drawerWidth = 240;
 
+const openedMixin = (theme: Theme): CSSObject => ({
+	width: drawerWidth,
+	transition: theme.transitions.create("width", {
+		easing: theme.transitions.easing.sharp,
+		duration: theme.transitions.duration.enteringScreen,
+	}),
+	overflowX: "hidden",
+});
 
-const NavBar = () => {
-  const [collapsed, setCollapsed] = useState(false);
-  const [currentActiveKey, setCurrentActiveKey] = useState<string>('home');
-  const navigate = useNavigate();
+const closedMixin = (theme: Theme): CSSObject => ({
+	transition: theme.transitions.create("width", {
+		easing: theme.transitions.easing.sharp,
+		duration: theme.transitions.duration.leavingScreen,
+	}),
+	overflowX: "hidden",
+	width: `calc(${theme.spacing(7)} + 1px)`,
+	[theme.breakpoints.up("sm")]: {
+		width: `calc(${theme.spacing(8)} + 1px)`,
+	},
+});
 
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
-  };
+const DrawerHeader = styled("div")(({ theme }) => ({
+	display: "flex",
+	alignItems: "center",
+	justifyContent: "flex-end",
+	padding: theme.spacing(0, 1),
+	// necessary for content to be below app bar
+	...theme.mixins.toolbar,
+}));
 
+interface AppBarProps extends MuiAppBarProps {
+	open?: boolean;
+}
 
-  type MenuItem = Required<MenuProps>["items"][number];
+const AppBar = styled(MuiAppBar, {
+	shouldForwardProp: (prop) => prop !== "open",
+})<AppBarProps>(({ theme, open }) => ({
+	zIndex: theme.zIndex.drawer + 1,
+	transition: theme.transitions.create(["width", "margin"], {
+		easing: theme.transitions.easing.sharp,
+		duration: theme.transitions.duration.leavingScreen,
+	}),
+	...(open && {
+		marginLeft: drawerWidth,
+		width: `calc(100% - ${drawerWidth}px)`,
+		transition: theme.transitions.create(["width", "margin"], {
+			easing: theme.transitions.easing.sharp,
+			duration: theme.transitions.duration.enteringScreen,
+		}),
+	}),
+}));
 
-  function getItem(
-    label: React.ReactNode,
-    key: React.Key,
-    icon?: React.ReactNode,
-    children?: MenuItem[],
-    type?: "group"
-  ) {
-    return {
-      key,
-      icon,
-      children,
-      label,
-      type,
-    };
-  }
+const Drawer = styled(MuiDrawer, {
+	shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+	width: drawerWidth,
+	flexShrink: 0,
+	whiteSpace: "nowrap",
+	boxSizing: "border-box",
+	...(open && {
+		...openedMixin(theme),
+		"& .MuiDrawer-paper": openedMixin(theme),
+	}),
+	...(!open && {
+		...closedMixin(theme),
+		"& .MuiDrawer-paper": closedMixin(theme),
+	}),
+}));
 
-  const items: MenuItem[] = [
-    getItem(
-      <div onClick={() => navigate("/")}>Home</div>,
-      "home",
-      <HomeOutlined />
-    ),
-    getItem(
-      <div onClick={() => navigate("/favourites")}>Favourites</div>,
-      "favourites",
-      <DesktopOutlined />),
-    getItem("Option 3", "3", <ContainerOutlined />),
-    getItem("Navigation One", "sub1", <MailOutlined />, [
-      getItem("Option 5", "5"),
-      getItem("Option 6", "6"),
-      getItem("Option 7", "7"),
-      getItem("Option 8", "8"),
-    ]),
-    getItem("Navigation Two", "sub2", <AppstoreOutlined />, [
-      getItem("Option 9", "9"),
-      getItem("Option 10", "10"),
-      getItem("Submenu", "sub3", null, [
-        getItem("Option 11", "11"),
-        getItem("Option 12", "12"),
-      ]),
-    ]),
-  ];
+export default function NavBar({ children }: any): JSX.Element {
+	const theme = useTheme();
+	const [open, setOpen] = React.useState(false);
 
-  return (
-    <Sider
-      collapsible
-      collapsed={collapsed}
-      onCollapse={(value: any) => setCollapsed(value)}
-    >
-      <div
-        style={{
-          height: 32,
-          margin: 16,
-          background: "rgba(255, 255, 255, 0.2)",
-        }}
-      />
-      <div>
-        <Button
-          type="primary"
-          onClick={toggleCollapsed}
-          style={{
-            marginBottom: 16,
-          }}
-        >
-          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        </Button>
-        <Menu
-          defaultSelectedKeys={["1"]}
-          defaultOpenKeys={["sub1"]}
-          mode="inline"
-          theme="dark"
-          inlineCollapsed={collapsed}
-          items={items}
-          onSelect={({ key }) => setCurrentActiveKey(key)}
-          defaultActiveFirst={true}
-          selectedKeys={[currentActiveKey]}
-        />
-      </div>
-    </Sider>
-  );
-};
+	const handleDrawerOpen = () => {
+		setOpen(true);
+	};
 
-export default NavBar;
+	const handleDrawerClose = () => {
+		setOpen(false);
+	};
+
+	const handleForward = () => {};
+	const handleBackward = () => {};
+
+	const styles = {
+		background: "rgba(29, 26, 26, 0.76)",
+		// borderRadius: "16px",
+		boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+		backdropFilter: "blur(8.4px)",
+		WebkitBackdropFilter: "blur(8.4px)",
+		// border: "1px solid rgba(72, 68, 68, 1)",
+	};
+
+	return (
+		<Box sx={{ display: "flex", background: "black" }}>
+			<CssBaseline />
+			<AppBar position="fixed" open={open} style={{ ...styles }}>
+				<Toolbar>
+					<IconButton
+						aria-label="open drawer"
+						onClick={handleDrawerOpen}
+						edge="start"
+						sx={{
+							marginRight: 5,
+							...(open && { display: "none" }),
+							color : "white",
+						}}
+					>
+						<MenuIcon style = {{color : "white"}} />
+					</IconButton>
+					<Grid container>
+						<Grid
+							item
+							xs={8}
+							sm={8}
+							md={8}
+							className="forwardBackwardContainer"
+						>
+							<IconButton onClick={handleForward}>
+								<ChevronLeftIcon className="forwardBackwardButtons" />
+							</IconButton>
+							<IconButton onClick={handleBackward}>
+								<ChevronRightIcon className="forwardBackwardButtons" />
+							</IconButton>
+						</Grid>
+						<Grid item xs={4} sm={4} md={4} className="loginContainer">
+							<Profile></Profile>
+						</Grid>
+					</Grid>
+				</Toolbar>
+			</AppBar>
+			<Drawer
+				variant="permanent"
+				open={open}
+				PaperProps={{
+					sx: {
+						background: "rgba(0, 0, 0, 0.8)",
+						// borderRadius: "16px",
+						boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
+						backdropFilter: "blur(8.4px)",
+						WebkitBackdropFilter: "blur(8.4px)",
+						// border: "1px solid rgba(72, 68, 68, 1)",
+					},
+				}}
+			>
+				<DrawerHeader>
+					<IconButton onClick={handleDrawerClose}>
+						{theme.direction === "rtl" ? (
+							<ChevronRightIcon style = {{color : "white"}} />
+						) : (
+							<ChevronLeftIcon style = {{color : "white"}} />
+						)}
+					</IconButton>
+				</DrawerHeader>
+				<Divider />
+				<List>
+					{["Home", "Favourites", "Search"].map((text, index) => (
+						<ListItem key={text} disablePadding sx={{ display: "block" }}>
+							<ListItemButton
+								sx={{
+									minHeight: 48,
+									justifyContent: open ? "initial" : "center",
+									px: 3,
+									color : "white"
+								}}
+							>
+								<ListItemIcon
+									sx={{
+										minWidth: 0,
+										mr: open ? 3 : "auto",
+										justifyContent: "center",
+										color : "white"
+									}}
+								>
+									{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+								</ListItemIcon>
+								<ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+							</ListItemButton>
+						</ListItem>
+					))}
+				</List>
+				<Divider />
+			</Drawer>
+			<Box component="main" sx={{ flexGrow: 1, p: 0, m: 0 }} maxWidth="100%">
+				<DrawerHeader />
+				{children}
+			</Box>
+		</Box>
+	);
+}

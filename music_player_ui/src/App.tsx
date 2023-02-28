@@ -5,7 +5,7 @@ import { Breadcrumb, Layout } from "antd";
 import { Content, Footer, Header } from "antd/es/layout/layout";
 import AppRoutes from "./Common/AppRoutes";
 import { Container, Typography } from "@material-ui/core";
-import NavBar2 from "./components/basicLayout/navBar2";
+import NavBar2 from "./components/basicLayout/navBar";
 import { Provider } from "react-redux";
 import store from "./store";
 

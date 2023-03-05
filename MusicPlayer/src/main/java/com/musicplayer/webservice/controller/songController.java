@@ -4,11 +4,9 @@ import com.musicplayer.webservice.model.entity.Song;
 import com.musicplayer.webservice.services.song.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -32,5 +30,10 @@ public class songController {
             return ResponseEntity.ok(song.get());
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @PostMapping()
+    public ResponseEntity<Song> addSong(@RequestBody @Valid Song song){
+        return ResponseEntity.ok(songService.addSong(song));
     }
 }

@@ -11,4 +11,6 @@ public interface SongService {
     List<Song> getAllSongs();
 
     Optional<Song> findById(UUID id);
+
+    Song addSong(Song song);
 }

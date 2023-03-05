@@ -17,7 +17,7 @@ public class DefaultSongService implements SongService {
 
     @Override
     public List<Song> getAllSongs(){
-        return songRepository.findAll();
+        return (List<Song>) songRepository.findAll();
     }
 
     @Override

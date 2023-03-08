@@ -1,6 +1,5 @@
 package com.musicplayer.webservice.model.entity;
 import lombok.Data;
-import org.hibernate.annotations.Entity;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;

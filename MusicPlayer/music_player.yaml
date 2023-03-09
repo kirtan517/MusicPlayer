@@ -4,11 +4,12 @@ services:
     image: mysql
     container_name: music_player_db
     ports:
-      - "3306:3306"
+      - "3307:3306"
     environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_USER: admin
       MYSQL_PASSWORD: admin
+      MYSQL_DATABASE : music_player
     volumes:
       - mysqldb:/var/lib/mysql
     networks:

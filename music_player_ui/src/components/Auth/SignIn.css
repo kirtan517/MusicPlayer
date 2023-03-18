@@ -1,0 +1,39 @@
+.container{
+    position: relative;
+}
+
+.image-container{
+    width : 100%;
+    z-index: 1;
+}
+.form-container{
+    display : flex;
+    position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+    width : 400px;
+    height : 500px;
+
+    /* From https://css.glass */
+background: rgba(255, 255, 255, 0.1);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(9.3px);
+-webkit-backdrop-filter: blur(9.3px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+color: white;
+
+
+}
+
+.font-container{
+    color : green;
+    background-color: red;
+    text-decoration-color: white;
+}
+
+.Grid-container{
+    margin: 25px 20px;
+}
